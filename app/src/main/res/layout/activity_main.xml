@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8sp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/scoreAnnounceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/scoreAnnounce"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/scoreTextView"
+                style="@style/scoreViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:gravity="right"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/scoreViewSlash"
+                style="@style/scoreViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_horizontal"
+                android:text="/" />
+
+            <TextView
+                android:id="@+id/wicketsTextView"
+                style="@style/scoreViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="25sp">
+
+            <TextView
+                android:id="@+id/overTextView"
+                style="@style/overViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:gravity="right"
+                android:text="0" />
+
+            <TextView
+                style="@style/overViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="." />
+
+            <TextView
+                android:id="@+id/ballsInOverTextView"
+                style="@style/overViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.50"
+                android:text="0" />
+
+            <TextView
+                style="@style/overViewStyle"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="6.8"
+                android:text=" Overs" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sixButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:onClick="addSixRuns"
+                    android:text="six" />
+
+                <Button
+                    android:id="@+id/fourButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="addFourRuns"
+                    android:text="four" />
+
+                <Button
+                    android:id="@+id/tripleButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:onClick="addThreeRuns"
+                    android:text="triple" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/doubleButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:onClick="addTwoRuns"
+                    android:text="double" />
+
+                <Button
+                    android:id="@+id/singleButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_weight="1"
+                    android:onClick="addOneRuns"
+                    android:text="single" />
+
+                <Button
+                    android:id="@+id/wideBallButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:onClick="addOneRunsExtra"
+                    android:text="wide" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/outButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginBottom="30sp"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1"
+                    android:onClick="addOneToOutTextView"
+                    android:text="out"
+                    android:textColor="#ff1800" />
+
+                <Button
+                    android:id="@+id/dotBallButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="1"
+                    android:onClick="addDotBall"
+                    android:text="dot ball" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/saveScoreButton"
+                style="@style/buttonStyle"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="#0dd717"
+                android:onClick="openSavedScoreList"
+                android:text="  save score  " />
+
+            <Button
+                android:id="@+id/resetGameButton"
+                style="@style/buttonStyle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="#fc5c4b"
+                android:onClick="resetGame"
+                android:text="  reset score  " />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

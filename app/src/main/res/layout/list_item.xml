@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#efebe9"
+    android:padding="18dp"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <TextView
+        android:id="@+id/runs_text_view"
+        android:textColor="@color/blackColor"
+        android:layout_width="match_parent"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        tools:text="123 Runs" />
+
+    <TextView
+        android:id="@+id/overs_tet_view"
+        android:textStyle="italic"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="in 10 Overs"/>
+
+
+
+
+
+
+</LinearLayout>

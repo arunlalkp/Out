@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@android:color/background_light</item>
+
+
+    </style>
+
+    <style name="scoreViewStyle">
+        <item name="android:textSize">80sp</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="overViewStyle">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="buttonStyle">
+        <item name="android:textColor">#FFF</item>
+        <item name="android:layout_height">85dp</item>
+    </style>
+
+</resources>

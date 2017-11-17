@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Out !</string>
+    <string name="scoreAnnounce">Come, Lets Start The Game !!</string>
+
+
+    <dimen name="width_0">0dp</dimen>
+
+</resources>
+
+
