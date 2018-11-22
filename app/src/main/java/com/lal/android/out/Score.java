@@ -1,31 +1,26 @@
 package com.lal.android.out;
 
 
-import java.util.ArrayList;
-import java.util.concurrent.RunnableScheduledFuture;
-
-
-
 /**
  * Created by hp on 16-10-2017.
  */
 
 public class Score {
 
-    private String mRuns;
-    private String mOvers;
+    private int mRuns;
+    private float mOvers;
 
-    public Score(String Runs, String Overs) {
+    public Score(int Runs, float Overs) {
         mRuns = Runs;
         mOvers = Overs;
     }
 
 
-    public String getRuns() {
+    public int getRuns() {
         return mRuns;
     }
 
-    public String getOvers() {
+    public float getOvers() {
         return mOvers;
     }
 }
