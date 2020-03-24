@@ -22,9 +22,10 @@
             android:textStyle="italic" />
 
         <LinearLayout
+            android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -32,7 +33,7 @@
                 style="@style/scoreViewStyle"
                 android:layout_width="@dimen/width_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
+                android:layout_weight="0.9"
                 android:gravity="right"
                 android:text="0" />
 
@@ -41,7 +42,7 @@
                 style="@style/scoreViewStyle"
                 android:layout_width="@dimen/width_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="0.2"
                 android:gravity="center_horizontal"
                 android:text="/" />
 
@@ -50,7 +51,7 @@
                 style="@style/scoreViewStyle"
                 android:layout_width="@dimen/width_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
+                android:layout_weight="0.9"
                 android:text="0" />
 
         </LinearLayout>
@@ -186,6 +187,15 @@
                     android:textColor="#ff1800" />
 
                 <Button
+                    style="@style/buttonStyle"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_marginBottom="30sp"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1"
+                    android:onClick="goToPreviousValues"
+                    android:text="DEAD BALL" />
+
+                <Button
                     android:id="@+id/dotBallButton"
                     style="@style/buttonStyle"
                     android:layout_width="@dimen/width_0"
@@ -222,4 +232,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

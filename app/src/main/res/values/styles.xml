@@ -14,7 +14,7 @@
     </style>
 
     <style name="scoreViewStyle">
-        <item name="android:textSize">80sp</item>
+        <item name="android:textSize">60sp</item>
         <item name="android:textColor">@color/blackColor</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>

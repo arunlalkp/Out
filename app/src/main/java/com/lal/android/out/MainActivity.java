@@ -2,12 +2,10 @@ package com.lal.android.out;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.LayoutRes;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,22 +16,42 @@ public class MainActivity extends AppCompatActivity {
     int balls = 0;
     int fallOfWickets = 0;
 
+    int previousOver;
+    int previousBalls;
+    int previousScore;
+    int previousFallOfWicket;
+    String previousAnnouncement;
+
     String allOutAnnouncement = "Oh No, All Out !";
     String allOutToastMessage = "All Out, Game Over !";
+
+    SQLiteHandler db;
+
+    TextView outView, overView, ballsView, scoreAnnounceView, scoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new SQLiteHandler(this);
+
+        outView = (TextView) findViewById(R.id.wicketsTextView);
+        overView = (TextView) findViewById(R.id.overTextView);
+        ballsView = (TextView) findViewById(R.id.ballsInOverTextView);
+        scoreAnnounceView = (TextView) findViewById(R.id.scoreAnnounceTextView);
+        scoreView = (TextView) findViewById(R.id.scoreTextView);
+
+
     }
 
 
     /**
-         * Perform when SIX button is Clicked
-         * add six runs to Score
-         *
-         * @param V view
-         */
+     * Perform when SIX button is Clicked
+     * add six runs to Score
+     *
+     * @param V view
+     */
 
     public void addSixRuns(View V) {
 
@@ -42,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
-
+        updatePreviousValues(score, balls, over, "What a SIX !", fallOfWickets);
         score = score + 6;
         balls = balls + 1;
+
         displayScore(score);
         displayBalls(balls);
         displayOver(over);
@@ -57,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             displayOver(over);
         }
     }
+
 
     /**
      * Perform when FOUR button is Clicked
@@ -71,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        updatePreviousValues(score, balls, over, "That is a FOUR !", fallOfWickets);
 
         score = score + 4;
         balls = balls + 1;
@@ -100,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
+        updatePreviousValues(score, balls, over, "Good Running Between wickets !", fallOfWickets);
 
         score = score + 3;
         balls = balls + 1;
@@ -130,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        updatePreviousValues(score, balls, over, "Nice Double !", fallOfWickets);
+
         score = score + 2;
         balls = balls + 1;
         displayScore(score);
@@ -158,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
+        updatePreviousValues(score, balls, over, "Just a Single !", fallOfWickets);
 
         score = score + 1;
         balls = balls + 1;
@@ -187,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
+        updatePreviousValues(score, balls, over, "Got an Extra Run !", fallOfWickets);
 
         score = score + 1;
         displayScore(score);
@@ -209,6 +236,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        updatePreviousValues(score, balls, over, "Oh No, " + fallOfWickets + " Wicket is gone", fallOfWickets);
+
+
         fallOfWickets = fallOfWickets + 1;
         balls = balls + 1;
         displayOut(fallOfWickets);
@@ -225,6 +255,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Perform when DEAD BALL / BACK is Clicked
+     * go back to previous Scoreboard
+     *
+     * @param V view
+     */
+    public void goToPreviousValues(View V){
+        displayPreviousValues(previousScore, previousBalls, previousOver, previousAnnouncement, previousFallOfWicket);
+    }
+
+
+
+    /**
      * Perform when DOT BALL button is Clicked
      * add 1 runs to Score without add balls
      *
@@ -237,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, allOutToastMessage, Toast.LENGTH_SHORT).show();
             return;
         }
-
+        updatePreviousValues(score, balls, over, "Dot Ball !!", fallOfWickets);
         balls = balls + 1;
         displayBalls(balls);
         displayOver(over);
@@ -250,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
             displayOver(over);
         }
     }
+
 
     /**
      * when the RESET Button is pressed
@@ -289,7 +332,6 @@ public class MainActivity extends AppCompatActivity {
      * @param out main score
      */
     public void displayOut(int out) {
-        TextView outView = (TextView) findViewById(R.id.wicketsTextView);
         outView.setText(String.valueOf(out));
     }
 
@@ -300,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
      * @param over main score
      */
     public void displayOver(int over) {
-        TextView overView = (TextView) findViewById(R.id.overTextView);
         overView.setText(String.valueOf(over));
     }
 
@@ -310,7 +351,6 @@ public class MainActivity extends AppCompatActivity {
      * @param balls main score
      */
     public void displayBalls(int balls) {
-        TextView ballsView = (TextView) findViewById(R.id.ballsInOverTextView);
         ballsView.setText(String.valueOf(balls));
     }
 
@@ -321,7 +361,6 @@ public class MainActivity extends AppCompatActivity {
      * @param scoreAnnounce main score Announcement
      */
     public void displayScoreAnnounce(String scoreAnnounce) {
-        TextView scoreAnnounceView = (TextView) findViewById(R.id.scoreAnnounceTextView);
         scoreAnnounceView.setText(scoreAnnounce);
     }
 
@@ -331,22 +370,59 @@ public class MainActivity extends AppCompatActivity {
      * @param score main score
      */
     public void displayScore(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.scoreTextView);
         scoreView.setText(String.valueOf(score));
+    }
+
+    /**
+     * Display the Values
+     *
+     * @param score main score
+     * @param balls
+     * @param over
+     * @param announcement
+     * @param fallOfWickets
+     */
+    private void displayPreviousValues(int score, int balls, int over, String announcement, int fallOfWickets) {
+        this.score = score;
+        this.balls = balls;
+        this.over = over;
+        this.fallOfWickets = fallOfWickets;
+        scoreView.setText(String.valueOf(score));
+        ballsView.setText(String.valueOf(balls));
+        overView.setText(String.valueOf(over));
+        scoreAnnounceView.setText(announcement);
+        outView.setText(String.valueOf(fallOfWickets));
+
+    }
+
+    /**
+     * Update previous Scoreboard values
+     *
+     */
+    public void updatePreviousValues(int score, int balls, int over, String announcement, int fallOfWickets){
+
+        previousScore = score;
+        previousBalls = balls;
+        previousOver = over;
+        previousAnnouncement = announcement;
+        previousFallOfWicket = fallOfWickets;
+
     }
 
     public void openSavedScoreList(View view) {
 
         // Start the activity connect to the saved score list activity
         // specified class
-
+        String oversStr = over + "." + balls;
+        Float overs = Float.parseFloat(oversStr);
+        Score s = new Score(this.score, overs);
+        db.addMatch(s);
         Intent ScoreListActivity = new Intent(this, ScoreListActivity.class);
         startActivity(ScoreListActivity);
 
     }
 
-
-    }
+}
 
 
 
