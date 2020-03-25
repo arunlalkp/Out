@@ -1,2 +1,2 @@
 # Out!
-Out - Android App for Cricket Score Couter.
+Out - Android App for Cricket Score Counter.
