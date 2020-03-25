@@ -377,10 +377,10 @@ public class MainActivity extends AppCompatActivity {
      * Display the Values
      *
      * @param score main score
-     * @param balls
-     * @param over
-     * @param announcement
-     * @param fallOfWickets
+     * @param balls balls
+     * @param over over
+     * @param announcement announcement
+     * @param fallOfWickets fallOfWickets
      */
     private void displayPreviousValues(int score, int balls, int over, String announcement, int fallOfWickets) {
         this.score = score;

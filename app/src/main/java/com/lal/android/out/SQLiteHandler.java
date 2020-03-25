@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 
 public class SQLiteHandler extends SQLiteOpenHelper {
-    private static final String TAG = SQLiteHandler.class.getSimpleName();
 
+    private static final String TAG = SQLiteHandler.class.getSimpleName();
     private static final int DATABASE_VERSION = 3;
 
     private static final String DATABASE_NAME = "out";
@@ -45,15 +45,24 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     public void addMatch(Score score) {
         SQLiteDatabase db = getWritableDatabase();
+        float overs = score.getOvers();
 
-        ContentValues values = new ContentValues();
-        values.put(RUNS, score.getRuns()); // Run
-        values.put(OVERS, score.getOvers()); // Overs
+        // check is at least one ball
+        if(overs > 0){
+            ContentValues values = new ContentValues();
+            values.put(RUNS, score.getRuns()); // Run
+            values.put(OVERS, score.getOvers()); // Overs
 
-        long id = db.insert(TABLE_NAME, null, values);
-        db.close();
+            long id = db.insert(TABLE_NAME, null, values);
+            db.close();
 
-        Log.d(TAG, "New match inserted into sqlite: " + id);
+            Log.d(TAG, "New match inserted into sqlite: " + id);
+        }
+        else {
+            Log.d(TAG, "Not Inserted");
+        }
+
+
 
     }
 
