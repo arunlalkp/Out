@@ -26,7 +26,8 @@
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:label="Match"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
