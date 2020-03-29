@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView outView, overView, ballsView, scoreAnnounceView, scoreView;
 
+    String TAG = "ActivityOne";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +45,42 @@ public class MainActivity extends AppCompatActivity {
         scoreAnnounceView = (TextView) findViewById(R.id.scoreAnnounceTextView);
         scoreView = (TextView) findViewById(R.id.scoreTextView);
 
+        Log.i(TAG, "----------ON CREATE-------------");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "----------ON START-------------");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "----------ON RESUME-------------");
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "----------ON PAUSE-------------");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "----------ON STOP-------------");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "----------ON DESTROY-------------");
+
+    }
 
     /**
      * Perform when SIX button is Clicked
@@ -406,6 +442,16 @@ public class MainActivity extends AppCompatActivity {
         previousOver = over;
         previousAnnouncement = announcement;
         previousFallOfWicket = fallOfWickets;
+
+    }
+
+    public  void saveScore(View view){
+//        Log.d("SaveScore", "Inside saveScore");
+        String oversStr = over + "." + balls;
+        Float overs = Float.parseFloat(oversStr);
+        Score s = new Score(this.score, overs);
+        db.addMatch(s);
+        Toast.makeText(MainActivity.this, "Match Saved", Toast.LENGTH_LONG).show();
 
     }
 

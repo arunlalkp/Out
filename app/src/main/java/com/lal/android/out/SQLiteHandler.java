@@ -55,10 +55,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
             long id = db.insert(TABLE_NAME, null, values);
             db.close();
-
+//            return true;
             Log.d(TAG, "New match inserted into sqlite: " + id);
         }
         else {
+//            return false;
             Log.d(TAG, "Not Inserted");
         }
 

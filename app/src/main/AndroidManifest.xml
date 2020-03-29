@@ -9,25 +9,36 @@
         android:roundIcon="@drawable/wicketslogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:name=".AboutActivity"
+            android:label="About"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:parentActivityName=".MainActivity"
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:label="Match"
+            android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
             android:name=".ScoreListActivity"
             android:label="Saved Scores"
-            >
-        </activity>
-
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
