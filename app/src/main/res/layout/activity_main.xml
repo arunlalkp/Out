@@ -193,7 +193,7 @@
                     android:layout_marginRight="2.5dp"
                     android:layout_weight="1"
                     android:onClick="goToPreviousValues"
-                    android:text="DEAD BALL" />
+                    android:text="DEAD BALLs" />
 
                 <Button
                     android:id="@+id/dotBallButton"
@@ -214,7 +214,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:background="#0dd717"
-                android:onClick="openSavedScoreList"
+                android:onClick="saveScore"
                 android:text="  save score  " />
 
             <Button
