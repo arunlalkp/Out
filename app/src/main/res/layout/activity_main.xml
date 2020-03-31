@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8sp"
@@ -14,12 +14,11 @@
             android:id="@+id/scoreAnnounceTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/product_sans_regular"
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="@string/scoreAnnounce"
-            android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:weightSum="2"
@@ -206,27 +205,43 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/saveScoreButton"
-                style="@style/buttonStyle"
-                android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:background="#0dd717"
-                android:onClick="saveScore"
-                android:text="  save score  " />
+                android:orientation="horizontal"
+                android:layout_gravity="bottom">
+                <Button
+                    android:id="@+id/resetGameButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="#fc5c4b"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2.5dp"
+                    android:onClick="resetGame"
+                    android:text="reset score" />
+                <Button
+                    android:id="@+id/saveScoreButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="#0dd717"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="2.5dp"
+                    android:onClick="saveScore"
+                    android:text="save score" />
 
-            <Button
-                android:id="@+id/resetGameButton"
-                style="@style/buttonStyle"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:background="#fc5c4b"
-                android:onClick="resetGame"
-                android:text="  reset score  " />
+
+
+            </LinearLayout>
+
+
+
+
 
 
         </LinearLayout>
