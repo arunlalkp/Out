@@ -39,7 +39,7 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
             TextView runsTextView = (TextView) listItemView.findViewById(R.id.runs_text_view);
             // Get the version name from the current AndroidFlavor object and
             // set this text on the name TextView
-            runsTextView.setText(currentScore.getRuns() + " Runs");
+            runsTextView.setText(currentScore.getRuns()+"/" + currentScore.getWickets());
 
             // Find the TextView in the list_item.xml layout with the ID version_number
             TextView numberTextView = (TextView) listItemView.findViewById(R.id.overs_tet_view);

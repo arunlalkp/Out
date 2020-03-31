@@ -16,7 +16,7 @@ public class ScoreListActivity extends AppCompatActivity {
 
         db = new SQLiteHandler(this);
 
-//        db.deleteAllMatch(); deletes everything in the database
+//        db.deleteAllMatch();
 
         ScoreAdapter adapter = new ScoreAdapter(this, db.getMatch());
         ListView listView = (ListView) findViewById(R.id.list);
