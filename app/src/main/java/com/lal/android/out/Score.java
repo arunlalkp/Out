@@ -9,10 +9,12 @@ public class Score {
 
     private int mRuns;
     private float mOvers;
+    private int mWickets;
 
-    public Score(int Runs, float Overs) {
+    public Score(int Runs, float Overs, int Wickets) {
         mRuns = Runs;
         mOvers = Overs;
+        mWickets = Wickets;
     }
 
 
@@ -23,4 +25,6 @@ public class Score {
     public float getOvers() {
         return mOvers;
     }
+
+    public  int getWickets(){ return mWickets;}
 }

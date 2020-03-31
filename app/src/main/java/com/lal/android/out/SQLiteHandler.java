@@ -3,7 +3,9 @@ package com.lal.android.out;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -12,13 +14,15 @@ import java.util.ArrayList;
 
 public class SQLiteHandler extends SQLiteOpenHelper {
 
-    private static final String TAG = SQLiteHandler.class.getSimpleName();
+//    private static final String TAG = SQLiteHandler.class.getSimpleName();
+    String TAG = "dbHelper";
     private static final int DATABASE_VERSION = 3;
 
     private static final String DATABASE_NAME = "out";
 
     private static final String TABLE_NAME = "match_list";
     private static final String RUNS = "runs";
+    private static final String WICKETS = "wickets";
     private static final String OVERS = "overs";
     private static final String ID = "id";
 
@@ -28,11 +32,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "Insert database on create method");
+
         String MATCH_LIST = "CREATE TABLE " + TABLE_NAME + "(" +
                 ID + " INTEGER PRIMARY KEY," +
                 RUNS + " INTEGER," +
+                WICKETS + " INTEGER," +
                 OVERS + " FLOAT" + " );";
-        db.execSQL(MATCH_LIST);
+
+        try{
+            db.execSQL(MATCH_LIST);
+        }
+        catch (SQLiteException ex){
+            Log.d(TAG,"on create err "+ ex.toString());
+        }
+
 
         Log.d(TAG, "Database tables created");
     }
@@ -51,15 +65,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         if(overs > 0){
             ContentValues values = new ContentValues();
             values.put(RUNS, score.getRuns()); // Run
+            values.put(WICKETS, score.getWickets()); // Wickets
             values.put(OVERS, score.getOvers()); // Overs
 
-            long id = db.insert(TABLE_NAME, null, values);
-            db.close();
-//            return true;
-            Log.d(TAG, "New match inserted into sqlite: " + id);
+            Log.d(TAG, "New match values: "+values);
+            try{
+                db.insertOrThrow(TABLE_NAME, null, values);
+                db.close();
+                Log.d(TAG, "New match inserted into sqlite: ");
+            }
+            catch (SQLiteException ex){
+                Log.d(TAG, "New match not inserted into sqlite: " + ex.toString());
+
+            }
+
         }
         else {
-//            return false;
             Log.d(TAG, "Not Inserted");
         }
 
@@ -85,15 +106,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         Log.d(TAG, "New match fetched from sqlite: " + cursor.getCount() +"");
-        for(int i=0;i<cursor.getCount();i++) {
+//        Log.d(TAG, "New match fetched from sqlite data ----: " + cursor +"");
+
+//        Log.d(TAG, "data number "+DatabaseUtils.dumpCursorToString(cursor));
+
+        for(int i=0; i<cursor.getCount(); i++) {
+
             Score score_item = new Score(
                     cursor.getInt(1),
-                    cursor.getFloat(2)
+                    cursor.getFloat(3),
+                    cursor.getInt(2)
+
             );
+            Log.d(TAG, "score: wickets - "+ score_item.getWickets() + ", overs - " + score_item.getOvers() + ", runs - " + score_item.getRuns());
 
             scoreList.add(score_item);
             cursor.moveToNext();
-            Log.d(TAG, "New match fetched from sqlite: " + score_item.getRuns() +"");
+//            Log.d(TAG, "New match fetched from sqlite: " + score_item.getRuns() +"");
 
         }
         cursor.close();
