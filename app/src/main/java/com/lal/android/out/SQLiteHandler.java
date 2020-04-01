@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -22,9 +24,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "match_list";
     private static final String RUNS = "runs";
-    private static final String WICKETS = "wickets";
     private static final String OVERS = "overs";
     private static final String ID = "id";
+    private static final String WICKETS = "wickets";
+    private static final String DATE = "date";
+
 
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,6 +42,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 ID + " INTEGER PRIMARY KEY," +
                 RUNS + " INTEGER," +
                 WICKETS + " INTEGER," +
+                DATE + " TEXT," +
                 OVERS + " FLOAT" + " );";
 
         try{
@@ -65,8 +70,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         if(overs > 0){
             ContentValues values = new ContentValues();
             values.put(RUNS, score.getRuns()); // Run
-            values.put(WICKETS, score.getWickets()); // Wickets
             values.put(OVERS, score.getOvers()); // Overs
+            values.put(WICKETS, score.getWickets()); // Wickets
+            values.put(DATE, score.getDate()); // Date
 
             Log.d(TAG, "New match values: "+values);
             try{
@@ -108,15 +114,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "New match fetched from sqlite: " + cursor.getCount() +"");
 //        Log.d(TAG, "New match fetched from sqlite data ----: " + cursor +"");
 
-//        Log.d(TAG, "data number "+DatabaseUtils.dumpCursorToString(cursor));
+        Log.d(TAG, "data number "+DatabaseUtils.dumpCursorToString(cursor));
 
         for(int i=0; i<cursor.getCount(); i++) {
 
             Score score_item = new Score(
-                    cursor.getInt(1),
-                    cursor.getFloat(3),
-                    cursor.getInt(2)
-
+                cursor.getInt(1),
+                cursor.getFloat(4),
+                cursor.getInt(2),
+                cursor.getLong(3)
             );
             Log.d(TAG, "score: wickets - "+ score_item.getWickets() + ", overs - " + score_item.getOvers() + ", runs - " + score_item.getRuns());
 

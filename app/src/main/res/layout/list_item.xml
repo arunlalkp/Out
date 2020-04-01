@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="#E4E2E2"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
     android:padding="15dp">
 
     <TextView
         android:id="@+id/runs_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/blackColor"
         android:fontFamily="@font/product_sans_bold"
+        android:textColor="@color/blackColor"
         android:textSize="28dp"
         android:textStyle="bold"
         tools:text="123/5" />
@@ -25,6 +25,12 @@
         android:fontFamily="@font/product_sans_regular"
         android:textSize="15dp"
         tools:text="in 10 Overs" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 
 </LinearLayout>

@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 /**
  * Created by hp on 16-10-2017.
  */
@@ -45,7 +46,12 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
             TextView numberTextView = (TextView) listItemView.findViewById(R.id.overs_tet_view);
             // Get the version number from the current AndroidFlavor object and
             // set this text on the number TextView
-            numberTextView.setText("in " + currentScore.getOvers() + " Overs");
+
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm aaa");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(currentScore.getDate());
+
+            numberTextView.setText("in " + currentScore.getOvers() + " Overs, on " + formatter.format(calendar.getTime()));
 
             // Return the whole list item layout (containing 2 TextViews and an ImageView)
             // so that it can be shown in the ListView
