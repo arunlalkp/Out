@@ -449,7 +449,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("SaveScore", "Inside saveScore");
         String oversStr = over + "." + balls;
         Float overs = Float.parseFloat(oversStr);
-        Score s = new Score(this.score, overs, this.fallOfWickets);
+        Score s = new Score(this.score, overs, this.fallOfWickets,System.currentTimeMillis());
         db.addMatch(s);
         Toast.makeText(MainActivity.this, "Match Saved", Toast.LENGTH_LONG).show();
 
@@ -461,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
         // specified class
         String oversStr = over + "." + balls;
         Float overs = Float.parseFloat(oversStr);
-        Score s = new Score(this.score, overs, this.fallOfWickets);
+        Score s = new Score(this.score, overs, this.fallOfWickets, System.currentTimeMillis());
         db.addMatch(s);
         Intent ScoreListActivity = new Intent(this, ScoreListActivity.class);
         startActivity(ScoreListActivity);
