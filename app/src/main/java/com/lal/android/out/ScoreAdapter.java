@@ -30,28 +30,32 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
             View listItemView = convertView;
             if (listItemView == null) {
                 listItemView = LayoutInflater.from(getContext()).inflate(
-                        R.layout.list_item, parent, false);
+                        R.layout.score_list_item, parent, false);
             }
 
             // Get the {@link AndroidFlavor} object located at this position in the list
             Score currentScore = getItem(position);
 
-            // Find the TextView in the list_item.xml layout with the ID version_name
+            // Find the TextView in the score_list_item.xml layout with the ID version_name
             TextView runsTextView = (TextView) listItemView.findViewById(R.id.runs_text_view);
             // Get the version name from the current AndroidFlavor object and
             // set this text on the name TextView
             runsTextView.setText(currentScore.getRuns()+"/" + currentScore.getWickets());
 
-            // Find the TextView in the list_item.xml layout with the ID version_number
+            // Find the TextView in the score_list_item.xml layout with the ID version_number
             TextView numberTextView = (TextView) listItemView.findViewById(R.id.overs_tet_view);
             // Get the version number from the current AndroidFlavor object and
             // set this text on the number TextView
 
-            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm aaa");
+            numberTextView.setText("in " + currentScore.getOvers() + " Overs");
+
+
+            TextView dateTextView = (TextView) listItemView.findViewById(R.id.date_text_view);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d EEE  ''yy, hh:mm aaa");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(currentScore.getDate());
-
-            numberTextView.setText("in " + currentScore.getOvers() + " Overs, on " + formatter.format(calendar.getTime()));
+            dateTextView.setText("on " + formatter.format(calendar.getTime()));
 
             // Return the whole list item layout (containing 2 TextViews and an ImageView)
             // so that it can be shown in the ListView
